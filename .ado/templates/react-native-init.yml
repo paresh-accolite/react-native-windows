@@ -62,13 +62,16 @@ steps:
     displayName: Add npm user to verdaccio
 
   - script: |
-      echo ##vso[task.setvariable variable=BeachBallBranchName]$(System.PullRequest.TargetBranch)
-    displayName: Enable No-Publish
+      echo BeachBallBranchName =  $(System.PullRequest.SourceBranchName)
+      echo ##vso[task.setvariable variable=BeachBallBranchName]$(System.PullRequest.SourceBranchName)
+    displayName: Set BeachBall Branch name for PR
     condition: eq('$(Build.Reason)', 'PullRequest')
 
   - script: |
-      echo ##vso[task.setvariable variable=BeachBallBranchName]$(Build.SourceBranchName)
-    displayName: Enable No-Publish
+      set
+      echo BeachBallBranchName =  $(Build.SourceBranch)
+      echo ##vso[task.setvariable variable=BeachBallBranchName]$(Build.SourceBranch)
+    displayName: Set BeachBall Branch name for CI
     condition: ne('$(Build.Reason)', 'PullRequest')
 
   - script: |
