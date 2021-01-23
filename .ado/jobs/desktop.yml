@@ -81,6 +81,8 @@ jobs:
         clean: false
         submodules: false
 
+      - template: ../templates/apply-published-version-vars.yml
+
       - powershell: |
           $newValue = '(FullyQualifiedName!~RNTesterIntegrationTests::)&' + "$(Desktop.IntegrationTests.Filter)"
           Write-Host "##vso[task.setvariable variable=Desktop.IntegrationTests.Filter]$newValue"
